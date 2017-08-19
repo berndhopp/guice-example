@@ -14,9 +14,9 @@ import java.util.Map;
 class Header extends HorizontalLayout{
 
     @Inject
-    Header(@NavigableViewClasses Map<Class<? extends View>, String> navigableViewClasses) {
+    Header(@NavigableViewClasses Map<String, Class<? extends View>> navigableViewClasses) {
 
-        for (String uriFragment : navigableViewClasses.values()) {
+        for (String uriFragment : navigableViewClasses.keySet()) {
             Button navigationButton = new Button(
                     "navigate to '" + uriFragment + "'",
                     e -> getUI().getNavigator().navigateTo(uriFragment)
