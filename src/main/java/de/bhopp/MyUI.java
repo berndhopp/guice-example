@@ -1,5 +1,8 @@
 package de.bhopp;
 
+import com.google.common.eventbus.Subscribe;
+import com.google.inject.Inject;
+
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.guice.annotation.GuiceUI;
@@ -8,9 +11,12 @@ import com.vaadin.guice.server.GuiceVaadinServlet;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 
+import de.bhopp.bus.NavigationButtonClickedEvent;
 import de.bhopp.components.Content;
 import de.bhopp.components.ViewContainer;
 import de.bhopp.views.ErrorView;
+
+import org.vaadin.guice.bus.UIEventBus;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -25,8 +31,21 @@ import javax.servlet.annotation.WebServlet;
 @GuiceUI(content = Content.class, viewContainer = ViewContainer.class, errorView = ErrorView.class)
 public class MyUI extends UI {
 
+    public MyUI(){
+    }
+
+    @Inject
+    MyUI(UIEventBus uiEventBus){
+        uiEventBus.register(this);
+    }
+
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+    }
+
+    @Subscribe
+    public void onNavigationButtonClicked(NavigationButtonClickedEvent e){
+        getNavigator().navigateTo(e.getUriFragment());
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

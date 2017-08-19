@@ -71,6 +71,11 @@
 			<artifactId>guice-vaadin</artifactId>
 			<version>2.0.0-alpha2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.vaadin.guice</groupId>
+			<artifactId>eventbus</artifactId>
+			<version>1.1.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
