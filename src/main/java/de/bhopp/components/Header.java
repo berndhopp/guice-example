@@ -10,6 +10,7 @@ import com.vaadin.ui.HorizontalLayout;
 
 import de.bhopp.bus.NavigationButtonClickedEvent;
 
+import org.vaadin.guice.bus.GlobalEventBus;
 import org.vaadin.guice.bus.UIEventBus;
 
 import java.util.Map;
@@ -18,7 +19,7 @@ import java.util.Map;
 class Header extends HorizontalLayout{
 
     @Inject
-    Header(@NavigableViewClasses Map<String, Class<? extends View>> navigableViewClasses, UIEventBus uiEventBus) {
+    Header(@NavigableViewClasses Map<String, Class<? extends View>> navigableViewClasses, UIEventBus uiEventBus, GlobalEventBus globalEventBus) {
 
         for (String uriFragment : navigableViewClasses.keySet()) {
             Button navigationButton = new Button(
@@ -28,5 +29,10 @@ class Header extends HorizontalLayout{
 
             addComponent(navigationButton);
         }
+
+        addComponent(new Button(
+            "fire global event",
+            e -> globalEventBus.post(new GlobalEvent()))
+        );
     }
 }
