@@ -9,6 +9,7 @@ import com.vaadin.ui.UI;
 
 import de.bhopp.bus.NavigationButtonClickedEvent;
 import de.bhopp.components.Content;
+import de.bhopp.components.GlobalEvent;
 import de.bhopp.components.ViewContainer;
 import de.bhopp.views.ErrorView;
 
@@ -25,4 +26,8 @@ public class MyUI extends UI {
         getNavigator().navigateTo(e.getUriFragment());
     }
 
+    @Subscribe
+    public void onGlobalEvent(GlobalEvent e) {
+        System.err.println("global event occurred");
+    }
 }

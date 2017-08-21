@@ -11,6 +11,6 @@ import javax.servlet.annotation.WebServlet;
 @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
 @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
 @PackagesToScan("de.bhopp")
-@EnableEventBus(global = DummyGlobalEventBus.class)
+@EnableEventBus
 public class MyUIServlet extends GuiceVaadinServlet {
 }
